@@ -4,8 +4,9 @@ import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { SpacexapiService } from '../network/spacexapi.service';
-import { Launch } from '../models/mission';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { SpacexapiService, TransformedLaunch } from '../network/spacexapi.service';
 
 @Component({
   selector: 'app-missionlist',
@@ -15,26 +16,25 @@ import { Launch } from '../models/mission';
     RouterLink,
     MatCardModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule
   ],
   templateUrl: './missionlist.component.html',
   styleUrls: ['./missionlist.component.scss']
 })
 export class MissionlistComponent implements OnInit {
-  launches: Launch[] = [];
+  launches: TransformedLaunch[] = [];
 
   constructor(private spacexService: SpacexapiService) { }
 
   ngOnInit(): void {
-    this.spacexService.getAllLaunches().subscribe(
-      (data) => {
-        this.launches = data.map(launch => ({
-          ...launch,
-          rocket: { name: launch.rocket.name || 'Unknown', type: launch.rocket.type || 'Unknown' }
-        }));
+    this.spacexService.getAllLaunches().subscribe({
+      next: (data: TransformedLaunch[]) => {
+        this.launches = data;
       },
-      (error) => console.error('Error fetching launches:', error)
-    );
+      error: (error: any) => console.error('Error fetching launches:', error)
+    });
   }
 
   getYear(date: string): string {

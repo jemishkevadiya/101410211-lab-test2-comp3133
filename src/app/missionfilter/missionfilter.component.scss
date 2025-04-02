@@ -1,7 +1,41 @@
-.filter-field {
-    margin: 20px;
+.filter-card {
+    max-width: 100%;
+    margin: 0 auto;
   }
   
-  mat-card {
-    margin: 20px;
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .filter-field {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filter-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .mission-item {
+    transition: all 0.3s ease;
+  }
+  
+  .details-button {
+    margin-left: auto;
+  }
+  
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }

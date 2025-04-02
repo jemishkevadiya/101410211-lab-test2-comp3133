@@ -1,21 +1,54 @@
-<mat-form-field appearance="fill" class="filter-field">
-    <mat-label>Filter by Year</mat-label>
-    <input matInput [(ngModel)]="year" (keyup.enter)="filterByYear()">
-    <button mat-icon-button matSuffix (click)="filterByYear()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
+<div class="container">
+    <div class="card">
+      <h1 class="card-title">Filter SpaceX Missions</h1>
+      <p class="card-subtitle">Filter by year, launch success, and landing success</p>
+      <div class="filter-section">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Launch Year</mat-label>
+          <input matInput [(ngModel)]="year" (keyup.enter)="applyFilters()" placeholder="e.g., 2020">
+          <mat-icon matSuffix (click)="applyFilters()">calendar_today</mat-icon>
+        </mat-form-field>
   
-  <mat-card *ngIf="launches.length > 0">
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let launch of launches">
-          <div mat-line>
-            <strong>{{launch.name}}</strong> ({{getYear(launch.date_utc)}})
-          </div>
-          <div mat-line>{{launch.details || 'No details available'}}</div>
-          <button mat-raised-button color="primary" [routerLink]="['/mission', launch.id]">Details</button>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+        <div class="filter-group">
+          <h3>Launch</h3>
+          <mat-radio-group [(ngModel)]="launchSuccess" (change)="applyFilters()">
+            <mat-radio-button [value]="undefined" color="primary">All</mat-radio-button>
+            <mat-radio-button [value]="true" color="primary">Successful</mat-radio-button>
+            <mat-radio-button [value]="false" color="primary">Failed</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <div class="filter-group">
+          <h3>Landing</h3>
+          <mat-radio-group [(ngModel)]="landingSuccess" (change)="applyFilters()">
+            <mat-radio-button [value]="undefined" color="primary">All</mat-radio-button>
+            <mat-radio-button [value]="true" color="primary">Successful</mat-radio-button>
+            <mat-radio-button [value]="false" color="primary">Failed</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <div class="filter-actions">
+          <button mat-raised-button class="details-button" (click)="applyFilters()">
+            Apply Filters
+          </button>
+          <button mat-raised-button class="reset-button" (click)="resetFilters()">
+            Reset Filters
+          </button>
+        </div>
+      </div>
+  
+      <div class="divider" *ngIf="launches.length > 0"></div>
+  
+      <div class="mission-item" *ngFor="let launch of launches">
+        <img class="mission-image" [src]="launch.links.patch.small" [alt]="launch.name + ' patch'" *ngIf="launch.links.patch.small">
+        <div class="mission-content">
+          <div class="mission-name">{{launch.name}}</div>
+          <div class="mission-year">{{getYear(launch.date_utc)}}</div>
+          <div class="mission-details">{{launch.details || 'No details available'}}</div>
+        </div>
+        <button mat-raised-button class="details-button" [routerLink]="['/mission', launch.id]">
+          Details
+        </button>
+      </div>
+    </div>
+  </div>

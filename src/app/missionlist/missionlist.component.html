@@ -1,15 +1,17 @@
-<mat-card>
-    <mat-card-title>SpaceX Mission Launch List</mat-card-title>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let launch of launches">
-          <div mat-line>
-            <strong>{{launch.name}}</strong> ({{getYear(launch.date_utc)}})
-          </div>
-          <div mat-line>{{launch.details || 'No details available'}}</div>
-          <div mat-line>Rocket: {{launch.rocket.name}} ({{launch.rocket.type}})</div>
-          <button mat-raised-button color="primary" [routerLink]="['/mission', launch.id]">Details</button>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+<div class="container">
+    <div class="card">
+      <h1 class="card-title">SpaceX Mission Launches</h1>
+      <p class="card-subtitle">Explore all SpaceX missions</p>
+      <div class="mission-item" *ngFor="let launch of launches">
+        <img class="mission-image" [src]="launch.links.patch.small" [alt]="launch.name + ' patch'" *ngIf="launch.links.patch.small">
+        <div class="mission-content">
+          <div class="mission-name">{{launch.name}}</div>
+          <div class="mission-year">{{getYear(launch.date_utc)}}</div>
+          <div class="mission-details">{{launch.details || 'No details available'}}</div>
+        </div>
+        <button mat-raised-button class="details-button" [routerLink]="['/mission', launch.id]">
+          Details
+        </button>
+      </div>
+    </div>
+  </div>

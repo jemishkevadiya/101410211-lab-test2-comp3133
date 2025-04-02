@@ -1,7 +1,19 @@
-mat-card {
-    margin: 20px;
-}
-
-mat-list-item {
-    margin-bottom: 10px;
-}
+.mission-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .mission-item {
+    transition: all 0.3s ease;
+  }
+  
+  .details-button {
+    margin-left: auto;
+  }
+  
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }

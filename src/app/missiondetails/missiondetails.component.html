@@ -1,15 +1,51 @@
-<mat-card *ngIf="launch">
-    <mat-card-title>{{launch.name}}</mat-card-title>
-    <mat-card-content>
-      <p>Launch Year: {{getYear(launch.date_utc)}}</p>
-      <p>Rocket: {{launch.rocket.name}} ({{launch.rocket.type}})</p>
-      <p>Details: {{launch.details || 'No details available'}}</p>
-      <div>
-        <h3>Links:</h3>
-        <img [src]="launch.links.patch.small" alt="Mission Patch" *ngIf="launch.links.patch.small" style="max-width: 100px;">
-        <p><a [href]="launch.links.article" target="_blank" *ngIf="launch.links.article">Article</a></p>
-        <p><a [href]="launch.links.wikipedia" target="_blank" *ngIf="launch.links.wikipedia">Wikipedia</a></p>
-        <p><a [href]="launch.links.webcast" target="_blank" *ngIf="launch.links.webcast">Video</a></p>
+<div class="container" *ngIf="launch">
+    <div class="card">
+      <h1 class="card-title">Mission - {{launch.name}}</h1>
+      <p class="card-subtitle">{{getYear(launch.date_utc)}}</p>
+      <div class="details-section">
+        <img class="mission-image" [src]="launch.links.patch.small" [alt]="launch.name + ' patch'" *ngIf="launch.links.patch.small">
+        <p><strong>Name:</strong> {{launch.name}}</p>
+        <p><strong>Launch Year:</strong> {{getYear(launch.date_utc)}}</p>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <div class="divider"></div>
+      <div class="details-section">
+        <h3>Rocket</h3>
+        <p><strong>Name:</strong> {{launch.rocket.name}}</p>
+        <p><strong>Type:</strong> {{launch.rocket.type}}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="details-section">
+        <h3>Launch Site</h3>
+        <p><strong>Name:</strong> {{launch.launchpad.name}}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="details-section">
+        <h3>Launch Details</h3>
+        <p>{{launch.details || 'No details available'}}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="details-section">
+        <h3>Links</h3>
+        <div class="links">
+          <a [href]="launch.links.article" target="_blank" *ngIf="launch.links.article">
+            <button mat-raised-button class="details-button">
+              Article
+            </button>
+          </a>
+          <a [href]="launch.links.wikipedia" target="_blank" *ngIf="launch.links.wikipedia">
+            <button mat-raised-button class="details-button">
+              Wikipedia
+            </button>
+          </a>
+          <a [href]="launch.links.webcast" target="_blank" *ngIf="launch.links.webcast">
+            <button mat-raised-button class="details-button">
+              Video
+            </button>
+          </a>
+        </div>
+      </div>
+      <button mat-raised-button class="back-button" (click)="goBack()">
+        Back
+      </button>
+    </div>
+  </div>

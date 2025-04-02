@@ -3,10 +3,10 @@ export interface Launch {
     name: string;
     date_utc: string;
     details: string;
-    rocket: {
-      name: string;
-      type: string;
-    };
+    success: boolean;
+    cores: { landing_success: boolean | null }[];
+    rocket: string; 
+    launchpad: string; 
     links: {
       patch: {
         small: string;
@@ -14,6 +14,7 @@ export interface Launch {
       article: string;
       wikipedia: string;
       webcast: string;
+      youtube_id?: string; 
     };
     id: string;
   }

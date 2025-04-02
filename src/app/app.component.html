@@ -1,7 +1,12 @@
-<mat-toolbar color="primary">
-  <span>SpaceX Missions</span>
-  <span class="spacer"></span>
-  <a mat-button routerLink="/">Mission List</a>
-  <a mat-button routerLink="/filter">Filter by Year</a>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<div class="container">
+  <nav class="navbar">
+    <div class="navbar-title">
+      SpaceX Missions
+    </div>
+    <div class="navbar-links">
+      <a class="nav-link" [routerLink]="['/']">Mission List</a>
+      <a class="nav-link" [routerLink]="['/filter']">Filter by Year</a>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

@@ -1,1 +1,15 @@
-<p>missionlist works!</p>
+<mat-card>
+    <mat-card-title>SpaceX Mission Launch List</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let launch of launches">
+          <div mat-line>
+            <strong>{{launch.name}}</strong> ({{getYear(launch.date_utc)}})
+          </div>
+          <div mat-line>{{launch.details || 'No details available'}}</div>
+          <div mat-line>Rocket: {{launch.rocket.name}} ({{launch.rocket.type}})</div>
+          <button mat-raised-button color="primary" [routerLink]="['/mission', launch.id]">Details</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>

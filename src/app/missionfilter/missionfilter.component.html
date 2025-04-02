@@ -1,1 +1,21 @@
-<p>missionfilter works!</p>
+<mat-form-field appearance="fill" class="filter-field">
+    <mat-label>Filter by Year</mat-label>
+    <input matInput [(ngModel)]="year" (keyup.enter)="filterByYear()">
+    <button mat-icon-button matSuffix (click)="filterByYear()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  
+  <mat-card *ngIf="launches.length > 0">
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let launch of launches">
+          <div mat-line>
+            <strong>{{launch.name}}</strong> ({{getYear(launch.date_utc)}})
+          </div>
+          <div mat-line>{{launch.details || 'No details available'}}</div>
+          <button mat-raised-button color="primary" [routerLink]="['/mission', launch.id]">Details</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>

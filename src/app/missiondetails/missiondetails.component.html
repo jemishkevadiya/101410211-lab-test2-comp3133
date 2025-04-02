@@ -1,1 +1,15 @@
-<p>missiondetails works!</p>
+<mat-card *ngIf="launch">
+    <mat-card-title>{{launch.name}}</mat-card-title>
+    <mat-card-content>
+      <p>Launch Year: {{getYear(launch.date_utc)}}</p>
+      <p>Rocket: {{launch.rocket.name}} ({{launch.rocket.type}})</p>
+      <p>Details: {{launch.details || 'No details available'}}</p>
+      <div>
+        <h3>Links:</h3>
+        <img [src]="launch.links.patch.small" alt="Mission Patch" *ngIf="launch.links.patch.small" style="max-width: 100px;">
+        <p><a [href]="launch.links.article" target="_blank" *ngIf="launch.links.article">Article</a></p>
+        <p><a [href]="launch.links.wikipedia" target="_blank" *ngIf="launch.links.wikipedia">Wikipedia</a></p>
+        <p><a [href]="launch.links.webcast" target="_blank" *ngIf="launch.links.webcast">Video</a></p>
+      </div>
+    </mat-card-content>
+  </mat-card>

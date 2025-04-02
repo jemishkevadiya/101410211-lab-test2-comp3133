@@ -6,5 +6,5 @@ import { MissiondetailsComponent } from './missiondetails/missiondetails.compone
 export const routes: Routes = [
   { path: '', component: MissionlistComponent },
   { path: 'filter', component: MissionfilterComponent },
-  { path: 'mission/:id', component: MissiondetailsComponent, data: { renderMode: 'ssr' } }
+  { path: 'mission/:id', component: MissiondetailsComponent, data: { renderMode: 'csr' } }
 ];
